@@ -190,7 +190,11 @@ struct tiledb_to_type<TILEDB_BLOB> {
 
 template <>
 struct tiledb_to_type<TILEDB_BOOL> {
+#if defined(__APPLE__) && defined(__ppc__)
+  using type = uint32_t;
+#else
   using type = uint8_t;
+#endif
   static const tiledb_datatype_t tiledb_type = TILEDB_BOOL;
   static constexpr const char* name = "BOOL";
 };

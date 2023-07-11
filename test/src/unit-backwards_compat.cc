@@ -294,9 +294,10 @@ TEST_CASE(
                 &buffers);
             break;
           }
+#if !(defined(__APPLE__) && defined(__ppc__))
           case TILEDB_BOOL:
+#endif
           case TILEDB_UINT8: {
-            set_buffer_wrapper<uint8_t>(
                 query,
                 attribute_name,
                 var_sized,
@@ -343,6 +344,9 @@ TEST_CASE(
                 &buffers);
             break;
           }
+#if defined(__APPLE__) && defined(__ppc__)
+          case TILEDB_BOOL:
+#endif
           case TILEDB_UINT32: {
             set_buffer_wrapper<uint32_t>(
                 query,
@@ -583,6 +587,9 @@ TEST_CASE(
             break;
           }
           case TILEDB_BOOL:
+#if !(defined(__APPLE__) && defined(__ppc__))
+          case TILEDB_BOOL:
+#endif
           case TILEDB_UINT8: {
             REQUIRE(static_cast<uint8_t*>(std::get<1>(buffer))[0] == 1);
             break;
@@ -599,6 +606,9 @@ TEST_CASE(
             REQUIRE(static_cast<int32_t*>(std::get<1>(buffer))[0] == 1);
             break;
           }
+#if defined(__APPLE__) && defined(__ppc__)
+          case TILEDB_BOOL:
+#endif
           case TILEDB_UINT32: {
             REQUIRE(static_cast<uint32_t*>(std::get<1>(buffer))[0] == 1);
             break;
@@ -793,7 +803,9 @@ TEST_CASE(
                 &buffers);
             break;
           }
+#if !(defined(__APPLE__) && defined(__ppc__))
           case TILEDB_BOOL:
+#endif
           case TILEDB_UINT8: {
             set_buffer_wrapper<uint8_t>(
                 query,
@@ -842,6 +854,9 @@ TEST_CASE(
                 &buffers);
             break;
           }
+#if defined(__APPLE__) && defined(__ppc__)
+          case TILEDB_BOOL:
+#endif
           case TILEDB_UINT32: {
             set_buffer_wrapper<uint32_t>(
                 query,
@@ -1117,7 +1132,9 @@ TEST_CASE(
             REQUIRE(static_cast<int8_t*>(std::get<1>(buffer))[0] == 1);
             break;
           }
+#if !(defined(__APPLE__) && defined(__ppc__))
           case TILEDB_BOOL:
+#endif
           case TILEDB_UINT8: {
             REQUIRE(static_cast<uint8_t*>(std::get<1>(buffer))[0] == 1);
             break;
@@ -1134,6 +1151,9 @@ TEST_CASE(
             REQUIRE(static_cast<int32_t*>(std::get<1>(buffer))[0] == 1);
             break;
           }
+#if defined(__APPLE__) && defined(__ppc__)
+          case TILEDB_BOOL:
+#endif
           case TILEDB_UINT32: {
             REQUIRE(static_cast<uint32_t*>(std::get<1>(buffer))[0] == 1);
             break;

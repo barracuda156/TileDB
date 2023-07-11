@@ -415,7 +415,7 @@ TEST_CASE_METHOD(
 }
 
 /**
- * Note: TILEDB_BOOL is currently equivalent to TILEDB_UINT8.
+ * Note: TILEDB_BOOL is currently equivalent to TILEDB_UINT8 (and to TILEDB_UINT32 on Darwin ppc).
  *
  * Future improvements on the bool Datatype could impact this test.
  */
