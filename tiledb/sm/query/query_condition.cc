@@ -1312,14 +1312,22 @@ struct QueryCondition::DenseDimCondition<
         T cell_value = start_coords[dim_idx] + start + c * stride;
         const bool cmp = BinaryCmp<T, Op>::cmp(
             &cell_value, sizeof(T), condition_value_content, sizeof(T));
+#ifdef __ppc__
+        result_buffer[c] = combination_op(result_buffer[c], (uint32_t)cmp);
+#else
         result_buffer[c] = combination_op(result_buffer[c], (uint8_t)cmp);
+#endif
       }
     } else {
       const void* cell_value = &start_coords[dim_idx];
       const bool cmp = BinaryCmp<T, Op>::cmp(
           cell_value, sizeof(T), condition_value_content, sizeof(T));
       for (uint64_t c = 0; c < result_buffer.size(); ++c) {
+#ifdef __ppc__
+        result_buffer[c] = combination_op(result_buffer[c], (uint32_t)cmp);
+#else
         result_buffer[c] = combination_op(result_buffer[c], (uint8_t)cmp);
+#endif
       }
     }
   }

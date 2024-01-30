@@ -197,7 +197,11 @@ struct tiledb_to_type<TILEDB_GEOM_WKT> {
 
 template <>
 struct tiledb_to_type<TILEDB_BOOL> {
+#ifdef __ppc__
+  using type = uint32_t;
+#else
   using type = uint8_t;
+#endif
   static const tiledb_datatype_t tiledb_type = TILEDB_BOOL;
   static constexpr const char* name = "BOOL";
 };

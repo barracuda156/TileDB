@@ -768,7 +768,11 @@ void ArraySchema::serialize(Serializer& serializer) const {
   serializer.write<format_version_t>(version);
 
   // Write allows_dups
+#ifdef __ppc__
+  serializer.write<uint32_t>(allows_dups_);
+#else
   serializer.write<uint8_t>(allows_dups_);
+#endif
 
   // Write array type
   auto array_type = (uint8_t)array_type_;

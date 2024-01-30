@@ -2486,12 +2486,21 @@ shared_ptr<const Enumeration> EnumerationFx::extend_enumeration(
   if constexpr (std::is_same_v<T, bool>) {
     // We have to call out bool specifically because of the stdlib
     // specialization for std::vector<bool>
+#ifdef __ppc__
+    std::vector<uint32_t> raw_values(values.size());
+    for (size_t i = 0; i < values.size(); i++) {
+      raw_values[i] = values[i] ? 1 : 0;
+    }
+    return enmr->extend(
+        raw_values.data(), raw_values.size() * sizeof(uint32_t), nullptr, 0);
+#else
     std::vector<uint8_t> raw_values(values.size());
     for (size_t i = 0; i < values.size(); i++) {
       raw_values[i] = values[i] ? 1 : 0;
     }
     return enmr->extend(
         raw_values.data(), raw_values.size() * sizeof(uint8_t), nullptr, 0);
+#endif
   } else if constexpr (std::is_pod_v<T>) {
     return enmr->extend(values.data(), values.size() * sizeof(T), nullptr, 0);
   } else {

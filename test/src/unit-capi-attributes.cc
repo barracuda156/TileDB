@@ -457,7 +457,11 @@ TEST_CASE_METHOD(
     create_dense_vector(array_name, attr_name, TILEDB_BOOL);
 
     // Prepare cell buffers
+#ifdef __ppc__
+    uint32_t buffer_write[] = {0, 1, 1, 0, 0, 0, 1, 0, 1, 1};
+#else
     uint8_t buffer_write[] = {0, 1, 1, 0, 0, 0, 1, 0, 1, 1};
+#endif
     uint64_t buffer_write_size = sizeof(buffer_write);
 
     // Open array
