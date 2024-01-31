@@ -40,7 +40,7 @@ gather_sources(${SOURCES})
 
 commence(object_library exception_wrapper)
   this_target_sources(${SOURCES})
-  this_target_link_libraries(export)
+  this_target_link_libraries(export atomic)
   this_target_object_libraries(baseline thread_pool config)
 conclude(object_library)
 

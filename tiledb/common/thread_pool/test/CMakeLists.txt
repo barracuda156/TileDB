@@ -33,4 +33,5 @@ commence(unit_test thread_pool)
     # a part of the thread pool.
     this_target_object_libraries(cancelable_tasks)
     this_target_sources(main.cc unit_thread_pool.cc)
+    this_target_link_libraries(atomic)
 conclude(unit_test)

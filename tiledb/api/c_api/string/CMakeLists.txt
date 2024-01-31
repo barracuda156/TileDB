@@ -37,7 +37,7 @@ gather_sources(${SOURCES})
 #
 commence(object_library capi_string)
   this_target_sources(${SOURCES})
-  this_target_link_libraries(export)
+  this_target_link_libraries(export atomic)
   this_target_object_libraries(baseline capi_context_stub)
 conclude(object_library)
 
